@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import './globals.css'
-
+ 
 export const metadata: Metadata = {
   title: 'My App',
   description: 'My Next.js application',
 }
-
+ 
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,6 +27,7 @@ export default function RootLayout({
             <div style={styles.links}>
               <Link href="/" style={styles.link}>Главная</Link>
               <Link href="/products" style={styles.link}>Продукты</Link>
+              <Link href="/tasks" style={styles.link}>Задачи</Link>
             </div>
           </nav>
         </header>
@@ -41,7 +42,7 @@ export default function RootLayout({
     </html>
   )
 }
-
+ 
 const styles = {
   header: {
     background: 'rgba(15, 15, 26, 0.8)',
@@ -101,9 +102,5 @@ const styles = {
     WebkitBackdropFilter: 'blur(10px)',
     backdropFilter: 'blur(10px)',
   },
-  footerSmall: {
-    fontSize: '0.875rem',
-    marginTop: '0.5rem',
-    opacity: 0.7,
-  }
 }
+ 
