@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { cacheLife } from 'next/cache' 
 import TaskList from './components/TaskList'
 
 export const metadata: Metadata = {
@@ -13,15 +14,21 @@ type Todo = {
   completed: boolean
 }
 
-export default async function TasksPage() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10', {
-    cache: 'no-store',
-  })
+async function getTasks() {
+  'use cache' 
+  cacheLife('tasks')
+
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
   const todos: Todo[] = await res.json()
+  
+  return todos
+}
+
+export default async function TasksPage() {
+  const todos = await getTasks()
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      {/* Заголовок */}
       <div style={{ marginBottom: '2rem' }}>
         <h1
           style={{
@@ -38,7 +45,6 @@ export default async function TasksPage() {
         </p>
       </div>
 
-      {/* Дочерний компонент получает данные через props */}
       <TaskList todos={todos} />
     </div>
   )

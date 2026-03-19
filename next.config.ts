@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  cacheComponents: true,  
+  cacheLife: {
+    tasks: {
+      stale: 600,      
+      revalidate: 1800, 
+      expire: 7200      
+    }
+  }
+}
 
-export default nextConfig;
+export default nextConfig
